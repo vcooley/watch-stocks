@@ -1,0 +1,37 @@
+{
+  "name": "stocks",
+  "version": "1.0.0",
+  "description": "A stock market visualization tool to interactively share stock charts with your friends",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "prod": "webpack -p",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcooley/stocks.git"
+  },
+  "author": "Vince Cooley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vcooley/stocks/issues"
+  },
+  "homepage": "https://github.com/vcooley/stocks#readme",
+  "dependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.0",
+    "react-router": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.15.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
