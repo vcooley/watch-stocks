@@ -1,3 +1,64 @@
+html {
+    height: 100%;
+}
 body {
     background: gray;
+    margin: 0;
+    padding: 0;
 }
+
+.main-container {
+    padding: 0;
+    margin: 0;
+}
+.room-container {
+    background: #202020;
+    padding-top: 20px;
+    height: 100%;
+    margin: 15px;
+}
+.chart-container {
+    background: red;
+    width: 95%;
+    max-width: 1140px;
+    min-width: 320px;
+    height: 400px;
+    margin: 0 auto;
+    display: block;
+}
+.ticker-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    list-style: none;
+    width: 95%;
+    margin: 0 auto;
+    padding: 15px;
+}
+.ticker {
+    width: 320px;
+    background: green;
+    height: 130px;
+    margin-top: 10px;
+}
+.add-ticker {
+
+}
+
+@media (max-width: 368px) {
+    .room-container {
+        margin: 2px;
+        width: 100%;
+    }
+    .chart-container {
+        width: 100%;
+    }
+    .ticker-container {
+        padding: 0;
+        width: 100%;
+    }
+    .ticker {
+        width: 100%;
+    }
+}
+

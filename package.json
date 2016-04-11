@@ -4,7 +4,7 @@
   "description": "A stock market visualization tool to interactively share stock charts with your friends",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --inline --hot",
     "prod": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
