@@ -1,17 +1,17 @@
-var React = require('react');
+import React, { Component } from 'react';
 
-var ChartContainer = React.createClass({
-  render: function() {
+class ChartContainer extends Component {
+  render() {
     return (
-      <div className = 'chart-container'>Here be chart</div>
+      <div className="chart-container">Here be chart</div>
       /*
         <RoomTitle/>
         <ZoomButtons/>
         <TimeButtons/>
         <Chart/>
       */
-    )
+    );
   }
-});
+}
 
 module.exports = ChartContainer;

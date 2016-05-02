@@ -1,20 +1,26 @@
-var React = require('react');
-var Ticker = require('../components/Ticker');
-var NewTicker = require('../components/NewTicker.js');
+import { connect } from 'react-redux';
+import { addTicker, removeTicker } from '../actions';
+import TickerList from '../components/TickerList';
 
-var TickerContainer = React.createClass({
-  render: function() {
-    return (
-      <ul className='ticker-container'>
-        <Ticker/>
-        <Ticker/>
-        <Ticker/>
-        <Ticker/>
-        <Ticker/>
-        <NewTicker/>
-      </ul>
-    )
-  }
-});
+const mapStateToProps = (state) => {
+  return {
+    tickers: state.tickers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleAddTicker: (symbol) => {
+      dispatch(addTicker(symbol));
+    },
+    handleRemoveTicker: (id) => {
+      dispatch(removeTicker(id));
+    },
+  };
+};
+
+const TickerContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps)(TickerList);
 
 module.exports = TickerContainer;

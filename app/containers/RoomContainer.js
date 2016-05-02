@@ -1,17 +1,16 @@
-var React = require('react');
-var Room = require('../components/Room');
-var TickerContainer = require('./TickerContainer');
-var ChartContainer = require('./ChartContainer');
+import React, { Component } from 'react';
+import TickerContainer from './TickerContainer';
+import ChartContainer from './ChartContainer';
 
-var HomeContainer = React.createClass({
-  render: function() {
+class RoomContainer extends Component {
+  render() {
     return (
-      <div className= 'room-container'>
-        <ChartContainer/>
-        <TickerContainer/>
+      <div className="room-container">
+        <ChartContainer />
+        <TickerContainer />
       </div>
-    )
+    );
   }
-});
+}
 
-module.exports = HomeContainer;
+module.exports = RoomContainer;

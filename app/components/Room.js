@@ -1,9 +1,9 @@
-var React = require('react');
+import React from 'react'
 
-function Room (props) {
+function Room() {
   return (
     <div>hello from room</div>
-  )
-};
+  );
+}
 
 module.exports = Room;
