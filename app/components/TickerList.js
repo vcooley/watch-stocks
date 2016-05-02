@@ -12,6 +12,7 @@ function TickerList(props) {
           id={ticker.id}
           tickerSymbol={ticker.tickerSymbol}
           description={ticker.description}
+          chartData={ticker.chartData}
           onRemoveTicker={handleRemoveTicker}
         />
      )}

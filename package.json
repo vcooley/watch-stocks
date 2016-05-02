@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/vcooley/stocks#readme",
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.2",
     "react-router": "^2.0.1",
-    "redux": "^3.4.0"
+    "redux": "^3.4.0",
+    "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.7",

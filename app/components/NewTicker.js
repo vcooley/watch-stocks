@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { addTicker } from '../actions';
+import { addTicker, fetchStockData } from '../actions';
 
 let NewTicker = ({ dispatch }) => {
   let input;
@@ -10,6 +10,7 @@ let NewTicker = ({ dispatch }) => {
       <form onSubmit={(e) => {
         e.preventDefault();
         dispatch(addTicker(input.value));
+        dispatch(fetchStockData(input.value, 12))
         input.value = '';
       }} >
         <input type="text" ref={node => {

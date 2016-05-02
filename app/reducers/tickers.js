@@ -1,8 +1,10 @@
 import {
-  ADD_TICKER, REQUEST_STOCK_DATA, RECEIVE_STOCK_DATA, REMOVE_TICKER,
+  ADD_TICKER, REQUEST_STOCK_DATA, RECEIVE_STOCK_DATA, 
+  REMOVE_TICKER, INVALIDATE_TICKER,
 } from '../actions';
 
 const ticker = (state = {
+  chartData: {},
   isFetching: false,
   didInvalidate: false,
   isHidden: false,

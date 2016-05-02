@@ -1,6 +1,4 @@
-const combineReducers = require('redux').combineReducers;
-const tickers = require('./tickers');
+import { combineReducers } from 'redux';
+import tickers from './tickers';
 
-const stockApp = combineReducers({ tickers });
-
-module.exports = stockApp;
+export const rootReducer = combineReducers({ tickers });

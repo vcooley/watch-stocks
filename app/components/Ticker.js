@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 
-function Ticker(props) {
-  const { onRemoveTicker, tickerSymbol, description, id } = props;
+let Ticker = ( props ) => {
+  console.log(props)
+  console.log('dispatch', dispatch)
+  const { onRemoveTicker, tickerSymbol, description, id, chartData } = props;
+  console.log(chartData)
   return (
     <li
       className="ticker"
@@ -21,6 +24,7 @@ Ticker.propTypes = {
   tickerSymbol: PropTypes.string.isRequired,
   onRemoveTicker: PropTypes.func.isRequired,
   description: PropTypes.string.isRequired,
+  chartData: PropTypes.object.isRequired,
 };
 
 module.exports = Ticker;
