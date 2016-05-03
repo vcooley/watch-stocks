@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addTicker, removeTicker } from '../actions';
+import { addTicker, removeTicker, fetchStockData } from '../actions';
 import TickerList from '../components/TickerList';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleAddTicker: (symbol) => {
-      dispatch(addTicker(symbol));
+      const action = dispatch(addTicker(symbol));
+      dispatch(fetchStockData(symbol, action.id));
     },
     handleRemoveTicker: (id) => {
       dispatch(removeTicker(id));

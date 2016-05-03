@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 
 let Ticker = ( props ) => {
-  console.log(props)
-  console.log('dispatch', dispatch)
   const { onRemoveTicker, tickerSymbol, description, id, chartData } = props;
-  console.log(chartData)
   return (
     <li
       className="ticker"
@@ -15,6 +12,7 @@ let Ticker = ( props ) => {
     >
       <h2>{tickerSymbol}</h2>
       <div>{description}</div>
+      <div>{JSON.stringify(chartData)}</div>
     </li>
   );
 }

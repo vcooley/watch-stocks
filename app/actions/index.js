@@ -19,11 +19,11 @@ export function requestStockData(symbol) {
   };
 }
 
-export const RECIEVE_STOCK_DATA = 'RECIEVE_STOCK_DATA';
-export function recieveStockData(symbol, json) {
+export const RECEIVE_STOCK_DATA = 'RECEIVE_STOCK_DATA';
+export function receiveStockData(id, json) {
   return {
-    type: RECIEVE_STOCK_DATA,
-    symbol,
+    type: RECEIVE_STOCK_DATA,
+    id,
     chartData: json,
     receivedAt: Date.now(),
   };
@@ -39,16 +39,22 @@ export function removeTicker(id) {
 
 export const INVALIDATE_TICKER = 'INVALIDATE_TICKER';
 export function invalidateTicker(id) {
-  type: INVALIDATE_TICKER,
-  id
+  return {
+    type: INVALIDATE_TICKER,
+    id,
+  }
 }
 
 export function fetchStockData(symbol, id) {
   return function(dispatch) {
+    console.log('fetching')
     dispatch(requestStockData(symbol));
     return fetch(
       `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json`)
-      .then(json => dispatch(recieveStockData(json)))
+      .then(response => response.json())
+      .then(json => {
+        console.log(json); return dispatch(receiveStockData(id, json))
+      })
       .catch(err => dispatch(invalidateTicker(id)))
   }
 }

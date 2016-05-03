@@ -2,15 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addTicker, fetchStockData } from '../actions';
 
-let NewTicker = ({ dispatch }) => {
+let NewTicker = ({ onAddTicker }) => {
   let input;
   let newTicker;
   return (
     <li className="ticker">
       <form onSubmit={(e) => {
         e.preventDefault();
-        dispatch(addTicker(input.value));
-        dispatch(fetchStockData(input.value, 12))
+        onAddTicker(input.value);
         input.value = '';
       }} >
         <input type="text" ref={node => {
@@ -23,7 +22,7 @@ let NewTicker = ({ dispatch }) => {
 };
 
 NewTicker.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onAddTicker: PropTypes.func.isRequired,
 };
 
 NewTicker = connect()(NewTicker);
