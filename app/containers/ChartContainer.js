@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
-import { Chart } from '../components/Chart';
+import { connect } from 'react-redux';
+import Chart from '../components/Chart';
 
 var options = {
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Fruit Consumption'
-        },
+        text: 'Fruit Consumption',
+      
         xAxis: {
             categories: ['Apples', 'Bananas', 'Oranges']
         },
@@ -25,18 +21,17 @@ var options = {
         }]
     };
 
-export class ChartContainer extends Component {
-  render() {
-    return (
-      <div className="chart-container">Here be chart
-        <Chart container="hello" options={options}/>
-      </div>
-      /*
-        <RoomTitle/>
-        <ZoomButtons/>
-        <TimeButtons/>
-        <Chart/>
-      */
-    );
-  }
+
+
+const mapStateToProps = (state) => {
+  return {
+    tickers: state.tickers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
 }
+
+export const ChartContainer = connect(
+  mapStateToProps, mapDispatchToProps)(Chart);

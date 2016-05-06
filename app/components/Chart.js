@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const Highcharts = require('highcharts');
+const Highcharts = require('highcharts/highstock');
 
 export class Chart extends Component {
   componentDidMount() {
@@ -11,9 +11,16 @@ export class Chart extends Component {
       this.props.options
     );
   }
+
   componentWillUnmount() {
     this.chart.destroy();
   }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('current', this.props);
+    console.log('next', nextProps);
+  }
+
   render() {
     return (
       <div id={this.props.container}></div>
