@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-fetch';
 
 let nextTicker = 0;
 
@@ -42,19 +42,24 @@ export function invalidateTicker(id) {
   return {
     type: INVALIDATE_TICKER,
     id,
-  }
+  };
 }
 
 export function fetchStockData(symbol, id) {
-  return function(dispatch) {
-    console.log('fetching')
+  return (dispatch) => {
     dispatch(requestStockData(symbol));
     return fetch(
       `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json`)
       .then(response => response.json())
-      .then(json => {
-        console.log(json); return dispatch(receiveStockData(id, json))
-      })
-      .catch(err => dispatch(invalidateTicker(id)))
-  }
+      .then(json => dispatch(receiveStockData(id, json)))
+      .catch(err => dispatch(invalidateTicker(id)));
+  };
+}
+
+export const INITIALIZE_CHART = 'INITIALIZE_CHART';
+export function initializeChart(chart) {
+  return {
+    type: INITIALIZE_CHART,
+    chart,
+  };
 }

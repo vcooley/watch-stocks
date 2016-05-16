@@ -1,5 +1,5 @@
 import {
-  ADD_TICKER, REQUEST_STOCK_DATA, RECEIVE_STOCK_DATA, 
+  ADD_TICKER, REQUEST_STOCK_DATA, RECEIVE_STOCK_DATA,
   REMOVE_TICKER, INVALIDATE_TICKER,
 } from '../actions';
 
@@ -22,10 +22,10 @@ const ticker = (state = {
         return Object.assign({}, state, {
           isFetching: true,
           didInvalidate: false,
-        });  
+        });
       }
       return state;
-      
+
     case RECEIVE_STOCK_DATA:
       if (action.id === state.id) {
         return Object.assign({}, state, {
@@ -36,13 +36,13 @@ const ticker = (state = {
         });
       }
       return state;
-      
+
     default:
       return state;
   }
 };
 
-const tickers = (state = [], action) => {
+export const tickers = (state = [], action) => {
   switch (action.type) {
     case ADD_TICKER:
       return [
@@ -62,5 +62,3 @@ const tickers = (state = [], action) => {
       return state;
   }
 };
-
-module.exports = tickers;

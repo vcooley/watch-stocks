@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import Chart from '../components/Chart';
+import { Chart } from '../components/Chart';
+import { initializeChart } from '../actions';
 
 var options = {
         text: 'Fruit Consumption',
-      
+
         xAxis: {
             categories: ['Apples', 'Bananas', 'Oranges']
         },
@@ -21,17 +22,22 @@ var options = {
         }]
     };
 
-
-
 const mapStateToProps = (state) => {
   return {
     tickers: state.tickers,
+    series: state.series,
+    options,
+    container: 'my-chart',
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
-}
+  return {
+    // Give redux access to chart
+    initializeChart: (chart) => {
+      dispatch(initializeChart(chart));
+    },
+  };
+};
 
-export const ChartContainer = connect(
-  mapStateToProps, mapDispatchToProps)(Chart);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Chart);
