@@ -2,6 +2,27 @@ import React, { Component, PropTypes } from 'react';
 const Highcharts = require('highcharts/highstock');
 
 export class Chart extends Component {
+  addSeriesToChart(series) {
+    const seriesIndex = this.chart.series.findIndex( chartSeries => {
+      return chartSeries.id === series.id;
+    });
+    if (seriesIndex !== -1 ){
+      this.removeSeriesFromChart(series);
+    }
+    this.chart.addSeries(series);
+    this.props.markAsAdded(series.id)
+  }
+
+  removeSeriesFromChart(series) {
+    const seriesIndex = this.chart.series.findIndex( chartSeries => {
+      return chartSeries.id === series.id;
+    })
+    if (seriesIndex !== -1) {
+      this.chart.series[seriesIndex].remove();
+    }
+    this.props.markAsRemoved(series.id);
+  } 
+
   componentDidMount() {
     if (this.props.modules) {
       this.props.modules.forEach(module => module(Highcharts));
@@ -12,11 +33,15 @@ export class Chart extends Component {
     );
   }
 
-
   componentWillReceiveProps(newProps) {
-    let oldSeriesIds = this.props.tickers.map(ticker => ticker.id);
-    let seriesToAdd = this.newProps.tickers.filter();
-    let seriesToRemove = this.newProps.tickers.filter();
+    let seriesToAdd = newProps.series.filter(series => {
+      return !series.isVisible && series.markedToAdd;
+    });
+    let seriesToRemove = newProps.series.filter(series => {
+      return series.isVisible && series.markedToRemove;
+    });
+    seriesToAdd.forEach(series => this.addSeriesToChart(series));
+    seriesToRemove.forEach(series => this.removeSeriesFromChart(series));
   }
 
   componentWillUnmount() {
@@ -24,6 +49,7 @@ export class Chart extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div id={this.props.container}></div>
     );

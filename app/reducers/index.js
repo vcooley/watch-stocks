@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 import { tickers } from './tickers';
-import { chart } from './chart';
+import { series } from './series';
 
-export const rootReducer = combineReducers({ tickers, chart });
+export const rootReducer = combineReducers({ tickers, series });

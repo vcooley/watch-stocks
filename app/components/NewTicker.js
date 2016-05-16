@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { addTicker, fetchStockData } from '../actions';
 
 let NewTicker = ({ onAddTicker }) => {
@@ -24,7 +23,5 @@ let NewTicker = ({ onAddTicker }) => {
 NewTicker.propTypes = {
   onAddTicker: PropTypes.func.isRequired,
 };
-
-NewTicker = connect()(NewTicker);
 
 module.exports = NewTicker;

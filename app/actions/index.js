@@ -12,10 +12,10 @@ export function addTicker(symbol) {
 }
 
 export const REQUEST_STOCK_DATA = 'REQUEST_STOCK_DATA';
-export function requestStockData(symbol) {
+export function requestStockData(id) {
   return {
     type: REQUEST_STOCK_DATA,
-    symbol,
+    id,
   };
 }
 
@@ -47,19 +47,46 @@ export function invalidateTicker(id) {
 
 export function fetchStockData(symbol, id) {
   return (dispatch) => {
-    dispatch(requestStockData(symbol));
+    dispatch(requestStockData(id));
     return fetch(
       `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json`)
       .then(response => response.json())
-      .then(json => dispatch(receiveStockData(id, json)))
+      .then(json => {
+        dispatch(receiveStockData(id, json));
+        dispatch(addSeries(id));
+      })
       .catch(err => dispatch(invalidateTicker(id)));
   };
 }
 
-export const INITIALIZE_CHART = 'INITIALIZE_CHART';
-export function initializeChart(chart) {
+export const ADD_SERIES = 'ADD_SERIES';
+export function addSeries(id) {
   return {
-    type: INITIALIZE_CHART,
-    chart,
-  };
+    type: ADD_SERIES,
+    id,
+  }
+}
+
+export const REMOVE_SERIES = 'REMOVE_SERIES';
+export function removeSeries(id) {
+  return {
+    type: REMOVE_SERIES,
+    id,
+  }
+}
+
+export const MARK_AS_ADDED = 'MARK_AS_ADDED';
+export function markAsAdded(id) {
+  return {
+    type: MARK_AS_ADDED,
+    id,
+  }
+}
+
+export const MARK_AS_REMOVED = 'MARK_AS_REMOVED';
+export function markAsRemoved(id) {
+  return {
+    type: MARK_AS_REMOVED,
+    id,
+  }
 }

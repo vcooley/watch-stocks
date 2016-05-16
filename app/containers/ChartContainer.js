@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Chart } from '../components/Chart';
-import { initializeChart } from '../actions';
+import { markAsAdded, markAsRemoved } from '../actions';
 
 var options = {
         text: 'Fruit Consumption',
@@ -34,9 +34,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // Give redux access to chart
-    initializeChart: (chart) => {
-      dispatch(initializeChart(chart));
-    },
+    markAsAdded: (id) => { dispatch(markAsAdded(id)); },
+    markAsRemoved: (id) => { dispatch(markAsRemoved(id)); },
   };
 };
 
