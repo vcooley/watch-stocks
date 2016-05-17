@@ -12,7 +12,6 @@ let Ticker = ( props ) => {
     >
       <h2>{tickerSymbol}</h2>
       <div>{description}</div>
-      <div>{JSON.stringify(chartData)}</div>
     </li>
   );
 }

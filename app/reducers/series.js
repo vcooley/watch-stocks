@@ -8,12 +8,13 @@ const defaultItem = {
   isVisible: false,
   markedToRemove: false,
   markedToAdd: false,
+  data: {}
 }
 
 const seriesItem = (state = defaultItem, action) => {
   switch (action.type) {
     case ADD_TICKER:
-        return Object.assign({}, state, { id: action.id });
+        return Object.assign({}, state, {id: action.id});
     case ADD_SERIES:
         return Object.assign({}, state, {
           markedToAdd: true, 

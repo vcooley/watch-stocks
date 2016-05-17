@@ -3,23 +3,14 @@ import { Chart } from '../components/Chart';
 import { markAsAdded, markAsRemoved } from '../actions';
 
 var options = {
-        text: 'Fruit Consumption',
-
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
+  rangeSelector: {selected: 1}
+        /* [{
             name: 'Jane',
             data: [1, 0, 4]
         }, {
             name: 'John',
-            data: [5, 7, 3]
-        }]
+            data: [['2016-05-16',5], ['2016-05-16', 7], ['2016-05-16', 3]]
+        /]*/
     };
 
 const mapStateToProps = (state) => {
@@ -27,13 +18,12 @@ const mapStateToProps = (state) => {
     tickers: state.tickers,
     series: state.series,
     options,
-    container: 'my-chart',
+    container: 'stocks-chart',
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // Give redux access to chart
     markAsAdded: (id) => { dispatch(markAsAdded(id)); },
     markAsRemoved: (id) => { dispatch(markAsRemoved(id)); },
   };

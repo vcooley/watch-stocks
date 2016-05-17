@@ -9,7 +9,7 @@ export class Chart extends Component {
     if (seriesIndex !== -1 ){
       this.removeSeriesFromChart(series);
     }
-    this.chart.addSeries(series);
+    this.chart.addSeries(series.chartData);
     this.props.markAsAdded(series.id)
   }
 
@@ -25,23 +25,33 @@ export class Chart extends Component {
 
   componentDidMount() {
     if (this.props.modules) {
-      this.props.modules.forEach(module => module(Highcharts));
+      this.props.modules.forEach( module => module(Highcharts));
     }
-    this.chart = new Highcharts[this.props.type || 'Chart'](
+    this.chart = new Highcharts[this.props.type || 'StockChart'](
       this.props.container,
       this.props.options
     );
   }
 
   componentWillReceiveProps(newProps) {
-    let seriesToAdd = newProps.series.filter(series => {
+    console.log(newProps)
+    let seriesToAdd = newProps.series.filter( series => {
       return !series.isVisible && series.markedToAdd;
-    });
-    let seriesToRemove = newProps.series.filter(series => {
+    })
+      .map( series => {
+        let ticker = newProps.tickers.find( ticker => ticker.id === series.id );
+        series.chartData = {
+          name: ticker.tickerSymbol,
+          data: ticker.chartData.data,
+          id: ticker.id,
+        }
+        return series;
+      });
+    let seriesToRemove = newProps.series.filter( series => {
       return series.isVisible && series.markedToRemove;
     });
-    seriesToAdd.forEach(series => this.addSeriesToChart(series));
-    seriesToRemove.forEach(series => this.removeSeriesFromChart(series));
+    seriesToAdd.forEach( series => this.addSeriesToChart(series));
+    seriesToRemove.forEach( series => this.removeSeriesFromChart(series));
   }
 
   componentWillUnmount() {
@@ -49,9 +59,8 @@ export class Chart extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
-      <div id={this.props.container}></div>
+      <div id={this.props.container} className='chart-container'></div>
     );
   }
 }

@@ -18,7 +18,6 @@ body {
     margin: 15px;
 }
 .chart-container {
-    background: red;
     width: 95%;
     max-width: 1140px;
     min-width: 320px;

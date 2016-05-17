@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import { apiKey } from '../config';
 
 let nextTicker = 0;
 
@@ -20,11 +21,11 @@ export function requestStockData(id) {
 }
 
 export const RECEIVE_STOCK_DATA = 'RECEIVE_STOCK_DATA';
-export function receiveStockData(id, json) {
+export function receiveStockData(id, data) {
   return {
     type: RECEIVE_STOCK_DATA,
     id,
-    chartData: json,
+    chartData: data,
     receivedAt: Date.now(),
   };
 }
@@ -49,10 +50,15 @@ export function fetchStockData(symbol, id) {
   return (dispatch) => {
     dispatch(requestStockData(id));
     return fetch(
-      `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json`)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveStockData(id, json));
+      `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?column_index=4&order=asc&api_key=${apiKey}`)
+      .then( response => response.json())
+      .then( json => {
+        const data = json.dataset_data.data.map( point => {
+          let date = new Date(point[0]);
+          point[0] = date.getTime();
+          return point;
+        });
+        dispatch(receiveStockData(id, { data }));
         dispatch(addSeries(id));
       })
       .catch(err => dispatch(invalidateTicker(id)));
