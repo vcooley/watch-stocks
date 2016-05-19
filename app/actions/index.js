@@ -46,31 +46,12 @@ export function invalidateTicker(id) {
   };
 }
 
-export function fetchStockData(symbol, id) {
-  return (dispatch) => {
-    dispatch(requestStockData(id));
-    return fetch(
-      `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?column_index=4&order=asc&api_key=${apiKey}`)
-      .then( response => response.json())
-      .then( json => {
-        const data = json.dataset_data.data.map( point => {
-          let date = new Date(point[0]);
-          point[0] = date.getTime();
-          return point;
-        });
-        dispatch(receiveStockData(id, { data }));
-        dispatch(addSeries(id));
-      })
-      .catch(err => dispatch(invalidateTicker(id)));
-  };
-}
-
 export const ADD_SERIES = 'ADD_SERIES';
 export function addSeries(id) {
   return {
     type: ADD_SERIES,
     id,
-  }
+  };
 }
 
 export const REMOVE_SERIES = 'REMOVE_SERIES';
@@ -78,7 +59,7 @@ export function removeSeries(id) {
   return {
     type: REMOVE_SERIES,
     id,
-  }
+  };
 }
 
 export const MARK_AS_ADDED = 'MARK_AS_ADDED';
@@ -86,7 +67,7 @@ export function markAsAdded(id) {
   return {
     type: MARK_AS_ADDED,
     id,
-  }
+  };
 }
 
 export const MARK_AS_REMOVED = 'MARK_AS_REMOVED';
@@ -94,5 +75,35 @@ export function markAsRemoved(id) {
   return {
     type: MARK_AS_REMOVED,
     id,
-  }
+  };
 }
+
+export const ERROR_MESSAGE = 'ERROR_MESSAGE';
+export function errorMessage(err) {
+  return {
+    type: ERROR_MESSAGE,
+    error: err,
+  };
+}
+
+export function fetchStockData(symbol, id) {
+  return (dispatch) => {
+    dispatch(requestStockData(id));
+    return fetch(
+      `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?column_index=4&order=asc&api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(json => {
+        const data = json.dataset_data.data.map(point => {
+          const date = new Date(point[0]);
+          return [date.getTime()].concat(point.slice(1));
+        });
+        dispatch(receiveStockData(id, { data }));
+        dispatch(addSeries(id));
+      })
+      .catch(err => {
+        dispatch(invalidateTicker(id));
+        dispatch(errorMessage(err));
+      });
+  };
+}
+

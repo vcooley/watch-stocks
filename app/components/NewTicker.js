@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
-import { addTicker, fetchStockData } from '../actions';
 
-let NewTicker = ({ onAddTicker }) => {
+const NewTicker = ({ onAddTicker }) => {
   let input;
-  let newTicker;
   return (
     <li className="ticker">
       <form onSubmit={(e) => {

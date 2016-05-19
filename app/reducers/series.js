@@ -1,59 +1,60 @@
-import { ADD_TICKER, 
-         ADD_SERIES, 
-         MARK_AS_ADDED, 
-         MARK_AS_REMOVED, 
+import { ADD_TICKER,
+         ADD_SERIES,
+         MARK_AS_ADDED,
+         MARK_AS_REMOVED,
          REMOVE_SERIES } from '../actions';
 
 const defaultItem = {
   isVisible: false,
   markedToRemove: false,
   markedToAdd: false,
-  data: {}
-}
+  data: {},
+};
 
 const seriesItem = (state = defaultItem, action) => {
   switch (action.type) {
     case ADD_TICKER:
-        return Object.assign({}, state, {id: action.id});
+      return Object.assign({}, state, { id: action.id });
     case ADD_SERIES:
-        return Object.assign({}, state, {
-          markedToAdd: true, 
-          markedToRemove: false
-        });
+      return Object.assign({}, state, {
+        markedToAdd: true,
+        markedToRemove: false,
+      });
     case REMOVE_SERIES:
       return Object.assign({}, state, {
         markedToRemove: true,
-        markedToAdd: false
+        markedToAdd: false,
       });
     case MARK_AS_ADDED:
       return Object.assign({}, state, {
-        isVisible: true, 
-        markedToAdd: false, 
-        markedToRemove: false 
+        isVisible: true,
+        markedToAdd: false,
+        markedToRemove: false,
       });
     case MARK_AS_REMOVED:
       return Object.assign({}, state, {
-        isVisible: false, 
-        markedToAdd: false, 
-        markedToRemove: false 
+        isVisible: false,
+        markedToAdd: false,
+        markedToRemove: false,
       });
     default:
       return state;
   }
-}
+};
 
 export const series = (state = [], action) => {
+  let removedDupes;
   switch (action.type) {
     case ADD_TICKER:
-      let removeDupes = state.filter(series => (series.id !== action.id));
-      removeDupes.push(seriesItem(defaultItem, action));
-      return removeDupes;
+      removedDupes = state.filter(item => (item.id !== action.id));
+      removedDupes.push(seriesItem(defaultItem, action));
+      return removedDupes;
     default:
-      return state.map(series => {
-          if (series.id === action.id) {
-            return seriesItem(series, action);
-          }
-          return series
-        });
+      return state.map(item => {
+        if (item.id === action.id) {
+          return seriesItem(item, action);
+        }
+        return item;
+      });
   }
-}
+};

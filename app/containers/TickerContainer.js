@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-module.exports = connect(
+export const TickerContainer = connect(
   mapStateToProps,
   mapDispatchToProps)(TickerList);

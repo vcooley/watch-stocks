@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
-let Ticker = ( props ) => {
-  const { onRemoveTicker, tickerSymbol, description, id, chartData } = props;
+const Ticker = (props) => {
+  const { onRemoveTicker, tickerSymbol, description, id } = props;
   return (
     <li
       className="ticker"
@@ -14,7 +14,7 @@ let Ticker = ( props ) => {
       <div>{description}</div>
     </li>
   );
-}
+};
 
 Ticker.propTypes = {
   id: PropTypes.number.isRequired,
