@@ -1,4 +1,5 @@
 .idea
 node_modules
-.eslintrc.js
+dist
 app/config.js
+server/config/local.env.js

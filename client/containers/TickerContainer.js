@@ -1,6 +1,18 @@
+import React from 'react';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 import { addTicker, removeTicker, fetchStockData } from '../actions';
 import TickerList from '../components/TickerList';
+
+const socket = io('http://127.0.0.1:3000');
+
+class TickerContainer extends React.Component {
+  render() {
+    return (
+      <TickerList {...this.props} socket={socket} />
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -20,6 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const TickerContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps)(TickerList);
+export default connect(mapStateToProps, mapDispatchToProps)(TickerContainer);

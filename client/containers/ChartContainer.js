@@ -29,6 +29,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const ChartContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps)(Chart);

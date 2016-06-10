@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Footer from '../components/Footer';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     const { children } = this.props;
     return (
@@ -16,5 +16,3 @@ class App extends Component {
 App.propTypes = {
   children: PropTypes.node,
 };
-
-module.exports = App;

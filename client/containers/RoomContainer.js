@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { TickerContainer } from './TickerContainer';
-import { ChartContainer } from './ChartContainer';
+import TickerContainer from './TickerContainer';
+import ChartContainer from './ChartContainer';
 
-class RoomContainer extends Component {
+export default class RoomContainer extends Component {
   render() {
     return (
       <div className="room-container">
@@ -12,5 +12,3 @@ class RoomContainer extends Component {
     );
   }
 }
-
-module.exports = RoomContainer;
