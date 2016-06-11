@@ -1,6 +1,7 @@
+const Room = require('room.model');
 
 exports.index = (req, res) => {
-  return;
+  ;
 };
 
 exports.show = (req, res) => {

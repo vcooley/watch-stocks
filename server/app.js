@@ -17,13 +17,13 @@ require('./routes')(app);
 io.on('connection', socket => {
   socket.on('add stock', data => {
     socket.broadcast.emit('add stock', {
-      symbol: data.symbol,
+      tickerSymbol: data.symbol,
     });
   });
 
   socket.on('remove stock', data => {
     socket.broadcast.emit('remove stock', {
-      symbol: data.symbol,
+      tickerSymbol: data.symbol,
     });
   });
 });
