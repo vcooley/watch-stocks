@@ -8,8 +8,15 @@ export function addTicker(symbol) {
   return {
     type: ADD_TICKER,
     id: nextTicker++,
+    isLocal: false,
     symbol,
   };
+}
+
+export function localAddTicker(symbol) {
+  const action = addTicker(symbol);
+  action.isLocal = true;
+  return action;
 }
 
 export const REQUEST_STOCK_DATA = 'REQUEST_STOCK_DATA';
@@ -34,8 +41,15 @@ export const REMOVE_TICKER = 'REMOVE_TICKER';
 export function removeTicker(id) {
   return {
     type: REMOVE_TICKER,
+    isLocal: false,
     id,
   };
+}
+
+export function localRemoveTicker(id) {
+  const action = removeTicker(id);
+  action.isLocal = true;
+  return action;
 }
 
 export const INVALIDATE_TICKER = 'INVALIDATE_TICKER';
@@ -98,12 +112,11 @@ export function fetchStockData(symbol, id) {
           return [date.getTime()].concat(point.slice(1));
         });
         dispatch(receiveStockData(id, { data }));
-        dispatch(addSeries(id));
+        return dispatch(addSeries(id));
       })
       .catch(err => {
         dispatch(invalidateTicker(id));
-        dispatch(errorMessage(err));
+        return dispatch(errorMessage(err));
       });
   };
 }
-

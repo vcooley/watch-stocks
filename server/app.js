@@ -1,8 +1,5 @@
 const app = require('express')();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
 const mongoose = require('mongoose');
-const Room = require('./api/room/room.model');
 const config = require('./config');
 
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -14,19 +11,8 @@ mongoose.connection.on('error', err => {
 require('./config/express')(app);
 require('./routes')(app);
 
-io.on('connection', socket => {
-  socket.on('add stock', data => {
-    socket.broadcast.emit('add stock', {
-      tickerSymbol: data.symbol,
-    });
-  });
-
-  socket.on('remove stock', data => {
-    socket.broadcast.emit('remove stock', {
-      tickerSymbol: data.symbol,
-    });
-  });
-});
+const server = require('http').Server(app);
+require('./config/socket')(server);
 
 server.listen(config.port, config.ip, () => {
   console.log(
