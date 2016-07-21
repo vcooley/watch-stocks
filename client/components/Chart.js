@@ -53,8 +53,9 @@ export class Chart extends Component {
 
   removeSeriesFromChart(series) {
     const seriesIndex = this.chart.series.findIndex(chartSeries => {
-      return chartSeries.id === series.id;
+      return chartSeries.name === series.tickerSymbol;
     });
+    console.log(series, seriesIndex)
     if (seriesIndex !== -1) {
       this.chart.series[seriesIndex].remove();
     }

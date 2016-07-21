@@ -1,17 +1,26 @@
 import io from 'socket.io-client';
-import { ADD_TICKER, REMOVE_TICKER, addTicker, fetchStockData, removeTicker } from './actions';
+import { ADD_TICKER, REMOVE_TICKER, addTicker, fetchStockData,
+         removeTicker, removeSeries } from './actions';
 
 const socket = io('http://127.0.0.1:3000');
 
 export const socketMiddleware = ({ getState, dispatch }) => {
-  socket.on('add ticker', symbol => {
+  const addAndFetch = symbol => {
     const addAction = dispatch(addTicker(symbol));
     dispatch(fetchStockData(addAction.symbol, addAction.id));
+  };
+
+  socket.on('initial tickers', tickers => {
+    tickers.forEach(ticker => {
+      addAndFetch(ticker);
+    });
   });
+  socket.on('add ticker', symbol => addAndFetch(symbol));
+
   socket.on('remove ticker', symbol => {
     const id = getState().tickers.find(ticker => ticker.tickerSymbol === symbol).id;
-    const action = dispatch(removeTicker(id));
-    return action;
+    dispatch(removeSeries(id));
+    return dispatch(removeTicker(id));
   });
 
   return next => action => {

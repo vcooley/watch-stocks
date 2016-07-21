@@ -14,7 +14,7 @@ const defaultItem = {
 const seriesItem = (state = defaultItem, action) => {
   switch (action.type) {
     case ADD_TICKER:
-      return Object.assign({}, state, { id: action.id });
+      return Object.assign({}, state, { id: action.id, tickerSymbol: action.symbol });
     case ADD_SERIES:
       return Object.assign({}, state, {
         markedToAdd: true,
