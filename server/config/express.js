@@ -13,7 +13,6 @@ module.exports = app => {
   app.use(bodyParser.json());
   app.use(compression());
   if (env === 'production') {
-    app.use(favicon(path.join(root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(root, 'public'), { maxAge: 1000 * 3600 * 2 }));
     app.set('appPath', path.join(root, 'public'));
   }
