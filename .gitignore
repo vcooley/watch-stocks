@@ -3,3 +3,6 @@ node_modules
 dist
 app/config.js
 server/config/local.env.js
+npm-debug.log
+.DS_Store
+/*.env
