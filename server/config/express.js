@@ -4,7 +4,7 @@ const errorHandler = require('errorhandler');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-const config = require('./environment');
+const config = require('./environment.js');
 
 module.exports = app => {
   const env = app.get('env');
