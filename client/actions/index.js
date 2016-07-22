@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import { apiKey } from '../config';
 
 let nextTicker = 0;
 
@@ -103,9 +102,7 @@ export function errorMessage(err) {
 export function fetchStockData(symbol, id) {
   return (dispatch) => {
     dispatch(requestStockData(id));
-    return fetch(
-      `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?column_index=4&order=asc&api_key=${apiKey}`)
-      .then(response => response.json())
+    return fetch(`/api/stocks/${symbol}`)
       .then(json => {
         const data = json.dataset_data.data.map(point => {
           const date = new Date(point[0]);

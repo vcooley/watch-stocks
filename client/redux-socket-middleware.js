@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import { ADD_TICKER, REMOVE_TICKER, addTicker, fetchStockData,
          removeTicker, removeSeries } from './actions';
 
-const socket = io('http://127.0.0.1:3000');
+const socket = io();
 
 export const socketMiddleware = ({ getState, dispatch }) => {
   const addAndFetch = symbol => {
