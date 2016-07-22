@@ -1,3 +1,5 @@
+const path = require('path');
+
 let local;
 try {
   local = require('./local.env.js');
@@ -12,7 +14,7 @@ try {
       options: {},
     },
     quandlApiKey: process.env.QUANDL_API_KEY,
-  }
+  };
 }
 
 module.exports = local;
