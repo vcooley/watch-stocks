@@ -103,18 +103,15 @@ export function fetchStockData(symbol, id) {
   return (dispatch) => {
     dispatch(requestStockData(id));
     return fetch(`/api/stocks/${symbol}`)
+      .then(response => response.json())
       .then(json => {
         const data = json.dataset_data.data.map(point => {
           const date = new Date(point[0]);
           return [date.getTime()].concat(point.slice(1));
         });
         dispatch(receiveStockData(id, { data }));
-        console.log(data);
         return dispatch(addSeries(id));
       })
-      .catch(err => {
-        dispatch(invalidateTicker(id));
-        return dispatch(errorMessage(err));
-      });
+      //TODO: Create error handler and catch
   };
 }
