@@ -13,8 +13,9 @@ module.exports = app => {
   app.use(bodyParser.json());
   app.use(compression());
   if (env === 'production') {
-    app.use(express.static(path.join(root, 'public'), { maxAge: 1000 * 3600 * 2 }));
-    app.set('appPath', path.join(root, 'public'));
+    app.use(favicon(path.join(root, 'dist/public', 'favicon.ico')));
+    app.use(express.static(path.join(root, 'dist/public'), { maxAge: 1000 * 3600 * 2 }));
+    app.set('appPath', path.join(root, 'dist/public'));
   }
 
   if (env === 'development' || env === 'test') {
