@@ -46,7 +46,7 @@
     "superagent-promise-plugin": "^3.2.0",
     "style-loader": "^0.13.1",
     "unirest": "^0.5.0",
-    "webpack": "^1.12.14",
+    "webpack": "^1.12.14"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
