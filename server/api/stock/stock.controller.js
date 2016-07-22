@@ -1,5 +1,5 @@
 const fetch = require('isomorphic-fetch');
-const apiKey = require('../../config/local.env.js').quandlApiKey;
+const apiKey = require('../../config').quandlApiKey;
 
 exports.index = (req, res) => {
   return;
