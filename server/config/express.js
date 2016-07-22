@@ -12,6 +12,7 @@ module.exports = app => {
   app.use(bodyParser.json());
   app.use(compression());
   if (env === 'production') {
+    process.env.NODE_ENV = 'production';
     app.use(express.static(path.join(root, 'dist/public'), { maxAge: 1000 * 3600 * 2 }));
     app.set('appPath', path.join(root, 'dist/public'));
   }

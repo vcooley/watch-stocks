@@ -109,6 +109,7 @@ export function fetchStockData(symbol, id) {
           return [date.getTime()].concat(point.slice(1));
         });
         dispatch(receiveStockData(id, { data }));
+        console.log(data);
         return dispatch(addSeries(id));
       })
       .catch(err => {
