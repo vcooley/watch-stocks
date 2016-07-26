@@ -92,10 +92,11 @@ export function markAsRemoved(id) {
 }
 
 export const ERROR_MESSAGE = 'ERROR_MESSAGE';
-export function errorMessage(err) {
+export function errorMessage(message) {
   return {
     type: ERROR_MESSAGE,
-    error: err,
+    scope: 'tickerError',
+    message,
   };
 }
 
@@ -112,6 +113,11 @@ export function fetchStockData(symbol, id) {
         dispatch(receiveStockData(id, { data }));
         return dispatch(addSeries(id));
       })
-      //TODO: Create error handler and catch
+      .catch(() => {
+        dispatch(removeTicker(id));
+        const message =
+          'There was an error searching for that symbol. Try a different one.';
+        return dispatch(errorMessage(message));
+      });
   };
 }

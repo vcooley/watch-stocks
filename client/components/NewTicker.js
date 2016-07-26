@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const NewTicker = ({ onAddTicker }) => {
+const NewTicker = ({ errorMessage, onAddTicker }) => {
   let input;
   return (
     <li className="ticker">
@@ -14,12 +14,14 @@ const NewTicker = ({ onAddTicker }) => {
         }} />
         <button>Add Stock</button>
       </form>
+      {errorMessage}
     </li>
   );
 };
 
 NewTicker.propTypes = {
   onAddTicker: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 module.exports = NewTicker;

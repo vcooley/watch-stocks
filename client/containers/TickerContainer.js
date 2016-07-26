@@ -15,6 +15,7 @@ class TickerContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     tickers: state.tickers,
+    errorMessage: state.errors.tickerError,
   };
 };
 

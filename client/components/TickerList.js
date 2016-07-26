@@ -4,7 +4,7 @@ import NewTicker from './NewTicker';
 
 export default class TickerList extends React.Component {
   render() {
-    const { tickers, handleRemoveTicker, handleAddTicker } = this.props;
+    const { errorMessage, tickers, handleRemoveTicker, handleAddTicker } = this.props;
     return (
       <ul className="ticker-container">
         {tickers.map(ticker =>
@@ -19,6 +19,7 @@ export default class TickerList extends React.Component {
        )}
       <NewTicker
         onAddTicker={handleAddTicker}
+        errorMessage={errorMessage}
       />
     </ul>);
   }
@@ -30,6 +31,7 @@ TickerList.propTypes = {
     tickerSymbol: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired).isRequired,
+  errorMessage: PropTypes.string.isRequired,
   handleRemoveTicker: PropTypes.func.isRequired,
   handleAddTicker: PropTypes.func.isRequired,
 };
